@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           </tr>
         `;
         tableBody.innerHTML += row;
+        tableBody.querySelector('tbody').appendChild(row);
+        tableBody.querySelector(`button[onclick="cancelReservation(${res.id})"]`).addEventListener('click', () => {
+          cancelReservation(res.id);
+        tableBody.removeChild(row);
       });
     } catch (error) {
       console.error('Error al cargar reservas:', error);
