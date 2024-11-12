@@ -24,13 +24,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
   
-  async function cancelReservation(reservationId) {
-    try {
-      await fetch(`http://localhost:3000/reservations/${reservationId}`, { method: 'DELETE', credentials: 'include' });
-      alert('Reserva cancelada');
+async function cancelReservation(reservationId) {
+  try {
+    const response = await fetch(`http://localhost:3000/reservations/${reservationId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+
+    if (response.ok) {
+      showAlert('Reserva cancelada exitosamente.', 'success');
       window.location.reload();
-    } catch (error) {
-      console.error('Error al cancelar reserva:', error);
+    } else {
+      throw new Error('No se pudo cancelar la reserva.');
     }
+  } catch (error) {
+    showAlert('Error al cancelar la reserva. Intenta nuevamente.', 'danger');
   }
-  
+}
+
+// Función para mostrar alertas visuales
+function showAlert(message, type) {
+  const alertBox = document.createElement('div');
+  alertBox.className = `alert alert-${type}`;
+  alertBox.textContent = message;
+  document.querySelector('.container').prepend(alertBox);
+
+  setTimeout(() => alertBox.remove(), 5000); // Eliminar alerta después de 5 segundos
+}
+
