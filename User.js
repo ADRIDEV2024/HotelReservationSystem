@@ -18,4 +18,17 @@ const User = sequelize.define('User', {
   },
 });
 
+const UserModel = {
+  User,
+  create: async (googleId, name) => {
+    const user = await User.create({ googleId, name });
+    return user;
+  },
+};
+
+function getUserByGoogleId(googleId) {
+  return User.findOne({ where: { googleId } });
+}
+
+export { UserModel, getUserByGoogleId }
 export default User;
