@@ -21,4 +21,18 @@ const Room = sequelize.define('Room', {
   },
 });
 
+const RoomModel = {
+  Room,
+  getRoomById: async (id) => {
+    return await Room.findByPk(id);
+  },
+  getAllRooms: async () => {
+    return await Room.findAll();
+  }
+}
+
+function getRoomByNumber(number) {
+  return RoomModel.Room.findOne({ where: { number } });
+}
+
 export default Room;
