@@ -35,4 +35,5 @@ function getRoomByNumber(number) {
   return RoomModel.Room.findOne({ where: { number } });
 }
 
+export { RoomModel, getRoomByNumber };
 export default Room;
