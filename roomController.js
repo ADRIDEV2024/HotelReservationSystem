@@ -2,7 +2,13 @@ import { findAll, create } from '../models/room.js';
 
 const getAllRooms = async (req, res) => {
   const rooms = await findAll();
-  res.json(rooms);
+  const createdOn = new Date();
+  const modifiedOn = new Date();
+  const isAvailable = true;
+  const totalBookings = 0;
+  const reservations = [];
+  res.json(rooms, createdOn, modifiedOn,
+     isAvailable, totalBookings, reservations);
 };
 
 const createRoom = async (req, res) => {
