@@ -30,5 +30,5 @@ function getUserByGoogleId(googleId) {
   return User.findOne({ where: { googleId } });
 }
 
-export { UserModel, getUserByGoogleId }
+export { UserModel, getUserByGoogleId };
 export default User;
