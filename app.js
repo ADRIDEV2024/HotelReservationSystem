@@ -64,3 +64,22 @@ sequelize.sync({ force: false }).then(() => {
   console.log('Base de datos sincronizada');
   app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
 });
+
+// Iniciar servidor y sincronizar base de datos
+const startServer = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexión a la base de datos establecida correctamente.');
+    
+    await sequelize.sync({ force: false });
+    console.log('Base de datos sincronizada');
+    
+    app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+  } catch (error) {
+    console.error('Error al iniciar el servidor:', error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
